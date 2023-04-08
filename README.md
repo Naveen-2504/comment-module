@@ -1,5 +1,24 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+#### Prerequisites
+
+working setup requiers **git**, **node**, **npm** installed.
+
+##### Installation Help docs
+
+- git - `https://gist.github.com/derhuerst/1b15ff4652a867391f03`
+- node, npm - `https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04`
+
+### Setting up the comments
+
+copy the ssh url and `git clone sshUrl` use command run the terminal
+
+Install node packages
+
+    npm install or npm i
+
+
 ## Getting Started
 
 First, run the development server:

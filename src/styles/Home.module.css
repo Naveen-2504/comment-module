@@ -1,10 +1,90 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  gap: 1rem;
+  align-items: flex-end;
   padding: 6rem;
-  min-height: 100vh;
+  height: 100vh;
+}
+
+.section {
+  background-color: #fff;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.article {
+  background-color: #fff;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 1.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4rem;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 0fr 1fr 0fr;
+  gap: 20px;
+  width: 100%;
+  background-color: hsl(0, 0%, 100%);
+  padding: 1.4rem;
+  align-items: start;
+  border-radius: 8;
+}
+
+.replaysec {
+  display: flex;
+  gap: 40px;
+  width: 92%;
+}
+
+.replyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: hsl(212deg 24% 26% / 53%);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.card section {
+  background-color: hsl(0, 0%, 100%);
+  width: 22rem;
+  height: 15rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: space-between;
+}
+
+.card article button {
+  font-size: 14px;
+
+
 }
 
 .description {
@@ -46,31 +126,6 @@
   max-width: 100%;
 }
 
-.card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
-}
-
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
-}
-
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  margin: 0;
-  opacity: 0.6;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-width: 30ch;
-}
 
 .center {
   display: flex;
@@ -143,33 +198,60 @@
   inset: 0;
   padding: 1px;
   border-radius: var(--border-radius);
-  background: linear-gradient(
-    to bottom right,
-    rgba(var(--tile-start-rgb), 1),
-    rgba(var(--tile-end-rgb), 1)
-  );
+  background: linear-gradient(to bottom right,
+      rgba(var(--tile-start-rgb), 1),
+      rgba(var(--tile-end-rgb), 1));
   background-clip: content-box;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+@media (min-width: 1440px) {
+  .main {
+    max-width: 984px;
+    margin: auto;
   }
 
-  .card:hover span {
-    transform: translateX(4px);
-  }
+  /* .section {
+    grid-template-columns: repeat(3, 1fr);
+  } */
 }
+
+
 
 @media (prefers-reduced-motion) {
   .thirteen::before {
     animation: none;
   }
+}
 
-  .card:hover span {
-    transform: none;
+@media (max-width: 600px) {
+  .gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* align-items: stretch; */
+    align-content: center;
+  }
+
+  .replaysec {
+    display: flex;
+    gap: 6px;
+    width: 96%;
+  }
+
+  .main {
+
+    padding: 2rem;
+
+  }
+}
+
+@media (max-width: 375px) {
+  .gridContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* align-items: stretch; */
+    align-content: center;
   }
 }
 
@@ -184,14 +266,6 @@
     margin-bottom: 120px;
     max-width: 320px;
     text-align: center;
-  }
-
-  .card {
-    padding: 1rem 2.5rem;
-  }
-
-  .card h2 {
-    margin-bottom: 0.5rem;
   }
 
   .center {
@@ -226,11 +300,9 @@
     border-radius: 0;
     border: none;
     border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
+    background: linear-gradient(to bottom,
+        rgba(var(--background-start-rgb), 1),
+        rgba(var(--callout-rgb), 0.5));
     background-clip: padding-box;
     backdrop-filter: blur(24px);
   }
@@ -241,11 +313,9 @@
     inset: auto 0 0;
     padding: 2rem;
     height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgb(var(--background-end-rgb)) 40%);
     z-index: 1;
   }
 }
@@ -272,6 +342,7 @@
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }
