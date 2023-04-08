@@ -14,7 +14,7 @@ export const CommentsReplay = ({
   index,
   commentIndex,
   editIndex,
-  handleDelete
+  handleDelete,
 }) => {
   return (
     <>
@@ -75,7 +75,7 @@ export const CommentsReplay = ({
                   backgroundColor: "hsl(238, 40%, 52%)",
                   padding: "0px 6px",
                   color: "hsl(0, 0%, 100%)",
-                  borderRadius: "2px"
+                  borderRadius: "2px",
                 }}
               >
                 you
@@ -151,16 +151,13 @@ export const CommentsReplay = ({
             <textarea
               className={styles.textarea}
               placeholder="Add a comment..."
-              value={
-                props?.replyingTo &&
-                "@" + props?.replyingTo + " " + props?.content
-              }
+              value={props?.content}
               name="content"
               onChange={(e) => handleChange(e, commentIndex, index)}
             />
             <button
               style={{ padding: "10px 20px", fontSize: 16, marginTop: 12 }}
-              onClick={() => editOnSubmit()}
+              onClick={(e) => editOnSubmit(e, index)}
             >
               UPDATE
             </button>
@@ -176,7 +173,6 @@ export const CommentsReplay = ({
           </p>
         )}
       </section>
-
     </>
   );
 };

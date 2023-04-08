@@ -1,6 +1,6 @@
 import moment from "moment";
 export function timeDiff(startTime, endTime) {
-  if (endTime.split(" ").length === 1) {
+  if (endTime?.split(" ").length === 1) {
     if (!startTime || !endTime) return "-";
 
     if (startTime < endTime)

@@ -21,5 +21,9 @@ export default function handler(req, res) {
     } else {
       res.status(422).json({ msg: "params is missing" });
     }
+  } else if(method === "PUT") {
+    const updatedDataJson = JSON.stringify(body, null, 2);
+    fs.writeFileSync("src/data/comment.json", updatedDataJson);
+    res.status(200).json({ msg: "Updated" });
   }
 }

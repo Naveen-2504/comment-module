@@ -1,6 +1,7 @@
 import {
   createComment,
   getComments,
+  updateComment,
   updateDislike,
   updateLike,
   updateReplayDislike,
@@ -66,17 +67,33 @@ export const Comments = () => {
 
   const handleChange = (e, commentIndex) => {
     const { name, value } = e.target;
-    if (editIndex) {
-      commentsData.comments[commentIndex] = {
-        ...commentsData.comments[commentIndex],
-        replies: [
-          ...commentsData.comments[commentIndex].replies,
-          {
-            ...commentsData.comments[commentIndex].replies[editIndex],
-            [name]: value,
-          },
-        ],
-      };
+    if (editIndex === 0 || editIndex) {
+      const itemIndex = commentsData.comments.findIndex(
+        (_, i) => i === commentIndex
+      );
+      const subItemIndex = commentsData.comments[itemIndex].replies.findIndex(
+        (_, i) => i === editIndex
+      );
+
+      const updatedItems = [
+        ...commentsData.comments.slice(0, itemIndex),
+        {
+          ...commentsData.comments[itemIndex],
+          replies: [
+            ...commentsData.comments[itemIndex].replies.slice(0, subItemIndex),
+            {
+              ...commentsData.comments[itemIndex].replies[subItemIndex],
+              [name]: value,
+            },
+            ...commentsData.comments[itemIndex].replies.slice(subItemIndex + 1),
+          ],
+        },
+        ...commentsData.comments.slice(itemIndex + 1),
+      ];
+      setCommentsData({
+        currentUser: commentsData.currentUser,
+        comments: updatedItems,
+      });
     } else {
       commentsData.comments[commentIndex] = {
         ...commentsData.comments[commentIndex],
@@ -91,8 +108,16 @@ export const Comments = () => {
     setEditIndex(index);
   };
 
-  const editOnSubmit = () => {
-    setEdit(false);
+  const editOnSubmit = (e, id) => {
+    e.preventDefault();
+    updateComment(id, commentsData)
+      .then((data) => {
+        setEdit(false);
+        setReplayBtn(false)
+        setCommentsData(null);
+        fetchComments();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleReplay = (index) => {
@@ -104,11 +129,15 @@ export const Comments = () => {
     }));
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     let requestBody = commentsData.comments.find((arr) => arr.user_content);
     createComment({ ...requestBody, currentUser: commentsData.currentUser })
       .then((data) => {
+        setEdit(false)
         setCommentsData(null);
+        setCommentBox(null);
+        setReplayBtn(false)
         fetchComments();
       })
       .catch((err) => console.log(err));
@@ -192,7 +221,7 @@ export const Comments = () => {
                 </>
               )}
 
-              {commentBox.mainIndex === i && lastIndex !== i && (
+              {commentBox?.mainIndex === i && lastIndex !== i && (
                 <section className={styles.gridContainer}>
                   <CreateComment
                     commentIndex={i}

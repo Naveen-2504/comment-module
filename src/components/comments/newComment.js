@@ -29,7 +29,7 @@ export const CreateComment = ({
         value={value}
       />
       <button
-        onClick={() => onClick()}
+        onClick={(e) => onClick(e)}
         style={{ padding: "10px 20px", fontSize: 16 }}
       >
         {btnName || "SEND"}

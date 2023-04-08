@@ -1,4 +1,4 @@
-import makeRequest from "../api/index";
+import makeRequest from "./index";
 
 export const getComments = () => {
   return makeRequest({
@@ -42,6 +42,14 @@ export const createComment = (body) => {
   return makeRequest({
     uri: `api/comments`,
     method: "POST",
+    body: JSON.stringify(body)
+  });
+};
+
+export const updateComment = (id, body) => {
+  return makeRequest({
+    uri: `api/comments/${id}`,
+    method: "PUT",
     body: JSON.stringify(body)
   });
 };
