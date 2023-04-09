@@ -249,7 +249,18 @@ export const Comments = () => {
               Are you sure want to delete this comment? This will remove that
               comment and can&#39;t be undone.
             </p>
-            <section style={{ display: "flex", gap: 12 }}>
+            <section
+              style={{
+                display: "flex",
+                borderRadius: 8,
+                gap: 5,
+                backgroundColor: "initial",
+                padding: 0,
+                flexDirection: "row",
+                width: "100%",
+                marginTop: 18,
+              }}
+            >
               <button
                 onClick={() => setOpenModal(false)}
                 style={{ backgroundColor: "hsl(212, 24%, 26%)" }}
