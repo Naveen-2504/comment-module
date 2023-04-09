@@ -13,14 +13,12 @@ export const CreateComment = ({
   const { currentUser } = props;
   return (
     <>
-      <figure>
-        <Image
-          src={currentUser.image.png}
-          alt={currentUser.username}
-          width={40}
-          height={40}
-        />
-      </figure>
+      <Image
+        src={currentUser.image.png}
+        alt={currentUser.username}
+        width={40}
+        height={40}
+      />
       <textarea
         className={styles.textarea}
         placeholder="Add a comment..."

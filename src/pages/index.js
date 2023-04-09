@@ -1,10 +1,6 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import { Comments } from "@/components/comments";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Main } from "@/styles/components";
 
 export default function Home() {
   return (
@@ -20,9 +16,9 @@ export default function Home() {
           href="/images/favicon-32x32.png"
         />
       </Head>
-      <main className={styles.main}>
+      <Main>
         <Comments />
-      </main>
+      </Main>
     </>
   );
 }

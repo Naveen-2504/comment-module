@@ -1,4 +1,9 @@
 import styles from "@/styles/Home.module.css";
+import {
+  AsideContainer,
+  FigureContainer,
+  FontContainer,
+} from "@/styles/components";
 import { timeDiff } from "@/utilis.js/time";
 import moment from "moment";
 import Image from "next/image";
@@ -16,18 +21,7 @@ export const CommentsSection = ({
   let onClick = comment_id ? submitReplayScore : onSubmitScore;
   return (
     <>
-      <aside
-        style={{
-          backgroundColor: "hsl(228, 33%, 97%)",
-          padding: 12,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 15,
-          borderRadius: "8px",
-        }}
-        className={styles.gridItem}
-      >
+      <AsideContainer>
         <Image
           src="/images/icon-plus.svg"
           alt="add"
@@ -45,12 +39,9 @@ export const CommentsSection = ({
           onClick={() => onClick({ id: props.id, comment_id })}
           style={{ cursor: "pointer" }}
         />
-      </aside>
+      </AsideContainer>
       <section>
-        <figure
-          style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-          className={styles.gridItem}
-        >
+        <FigureContainer>
           <Image
             src={props?.user?.image?.png}
             alt={props?.user?.username}
@@ -58,49 +49,41 @@ export const CommentsSection = ({
             height={35}
           />
           <figcaption>
-            <span
-              style={{ fontFamily: "'Rubik', sans-serif", fontWeight: 700 }}
-            >
+            <FontContainer style={{ fontWeight: 700 }}>
               {props?.user?.username}
-            </span>
-            <span
+            </FontContainer>
+            <FontContainer
               style={{
-                fontFamily: "'Rubik', sans-serif",
                 margin: "0px 12px",
                 color: "hsl(211, 10%, 45%)",
               }}
             >
-             {timeDiff(moment(), props?.createdAt)}
-            </span>
+              {timeDiff(moment(), props?.createdAt)}
+            </FontContainer>
           </figcaption>
-        </figure>
+        </FigureContainer>
         <p style={{ marginTop: 20 }}>
           {props?.replyingTo && (
-            <span
+            <FontContainer
               style={{
                 color: "hsl(238, 40%, 52%)",
-                fontFamily: "'Rubik', sans-serif",
                 fontWeight: 500,
               }}
             >
               @{props?.replyingTo + "  "}
-            </span>
+            </FontContainer>
           )}
           {props?.content}
         </p>
       </section>
       <section>
-        <figure
+        <FigureContainer
           style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
             cursor:
               replayIndex?.index === index && replayBtn
                 ? "not-allowed"
                 : "pointer",
           }}
-          className={styles.gridItem}
           onClick={() => {
             replayIndex?.index === index && replayBtn
               ? {}
@@ -125,7 +108,7 @@ export const CommentsSection = ({
           >
             Replay
           </figcaption>
-        </figure>
+        </FigureContainer>
       </section>
     </>
   );

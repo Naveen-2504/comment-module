@@ -13,6 +13,7 @@ import { CommentsSection } from "./section";
 import { CommentsReplay } from "./replay";
 import { CreateComment } from "./newComment";
 import { deleteReplayDislike } from "@/api/comments";
+import { GridContainer, ReplayContainer } from "@/styles/components";
 
 export const Comments = () => {
   const [commentsData, setCommentsData] = useState();
@@ -113,7 +114,7 @@ export const Comments = () => {
     updateComment(id, commentsData)
       .then((data) => {
         setEdit(false);
-        setReplayBtn(false)
+        setReplayBtn(false);
         setCommentsData(null);
         fetchComments();
       })
@@ -134,10 +135,10 @@ export const Comments = () => {
     let requestBody = commentsData.comments.find((arr) => arr.user_content);
     createComment({ ...requestBody, currentUser: commentsData.currentUser })
       .then((data) => {
-        setEdit(false)
+        setEdit(false);
         setCommentsData(null);
         setCommentBox(null);
-        setReplayBtn(false)
+        setReplayBtn(false);
         fetchComments();
       })
       .catch((err) => console.log(err));
@@ -160,7 +161,7 @@ export const Comments = () => {
           let lastIndex = commentsData.comments.length - 1;
           return (
             <>
-              <section className={styles.gridContainer}>
+              <GridContainer>
                 <CommentsSection
                   props={item}
                   onSubmitScore={onSubmitScore}
@@ -169,60 +170,53 @@ export const Comments = () => {
                   replayBtn={replayBtn}
                   replayIndex={replayIndex}
                 />
-              </section>
+              </GridContainer>
 
               {item.replies.length > 0 && (
-                <>
-                  <article className={styles.replaysec}>
-                    <section
-                      style={{ border: "2px solid hsl(223, 19%, 93%)" }}
-                    />
-                    <section
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 14,
-                      }}
-                    >
-                      {item.replies.map((arr, index) => (
-                        <section key={i} className={styles.gridContainer}>
-                          {arr?.user?.username ===
-                          commentsData.currentUser.username ? (
-                            <>
-                              <CommentsReplay
-                                submitReplayScore={submitReplayScore}
-                                props={arr}
-                                comment_id={item.id}
-                                onClick={editOnClick}
-                                edit={edit}
-                                handleChange={handleChange}
-                                editOnSubmit={editOnSubmit}
-                                index={index}
-                                commentIndex={i}
-                                onDeleteReplay={onDeleteReplay}
-                                editIndex={editIndex}
-                                handleDelete={handleDelete}
-                              />
-                            </>
-                          ) : (
-                            <>
-                              <CommentsSection
-                                props={arr}
-                                submitReplayScore={submitReplayScore}
-                                comment_id={item.id}
-                                handleReplay={handleReplay}
-                              />
-                            </>
-                          )}
-                        </section>
-                      ))}
-                    </section>
-                  </article>
-                </>
+                <ReplayContainer>
+                  <section style={{ border: "2px solid hsl(223, 19%, 93%)" }} />
+                  <section
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 14,
+                      width: "100%",
+                    }}
+                  >
+                    {item.replies.map((arr, index) => (
+                      <GridContainer key={i}>
+                        {arr?.user?.username ===
+                        commentsData.currentUser.username ? (
+                          <CommentsReplay
+                            submitReplayScore={submitReplayScore}
+                            props={arr}
+                            comment_id={item.id}
+                            onClick={editOnClick}
+                            edit={edit}
+                            handleChange={handleChange}
+                            editOnSubmit={editOnSubmit}
+                            index={index}
+                            commentIndex={i}
+                            onDeleteReplay={onDeleteReplay}
+                            editIndex={editIndex}
+                            handleDelete={handleDelete}
+                          />
+                        ) : (
+                          <CommentsSection
+                            props={arr}
+                            submitReplayScore={submitReplayScore}
+                            comment_id={item.id}
+                            handleReplay={handleReplay}
+                          />
+                        )}
+                      </GridContainer>
+                    ))}
+                  </section>
+                </ReplayContainer>
               )}
 
               {commentBox?.mainIndex === i && lastIndex !== i && (
-                <section className={styles.gridContainer}>
+                <GridContainer>
                   <CreateComment
                     commentIndex={i}
                     props={commentsData}
@@ -231,10 +225,10 @@ export const Comments = () => {
                     btnName="REPLAY"
                     onClick={onSubmit}
                   />
-                </section>
+                </GridContainer>
               )}
               {lastIndex === i && (
-                <section className={styles.gridContainer}>
+                <GridContainer>
                   <CreateComment
                     props={commentsData}
                     handleChange={handleChange}
@@ -242,7 +236,7 @@ export const Comments = () => {
                     value={item.user_content}
                     onClick={onSubmit}
                   />
-                </section>
+                </GridContainer>
               )}
             </>
           );
@@ -255,7 +249,7 @@ export const Comments = () => {
               Are you sure want to delete this comment? This will remove that
               comment and can&#39;t be undone.
             </p>
-            <article style={{ display: "flex", gap: 12 }}>
+            <section style={{ display: "flex", gap: 12 }}>
               <button
                 onClick={() => setOpenModal(false)}
                 style={{ backgroundColor: "hsl(212, 24%, 26%)" }}
@@ -268,7 +262,7 @@ export const Comments = () => {
               >
                 YES, DELETE
               </button>
-            </article>
+            </section>
           </section>
         </article>
       )}
