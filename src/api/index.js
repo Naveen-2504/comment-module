@@ -1,5 +1,5 @@
 export default async function ({  uri, method = "GET", body }) {
-  const apiUrl = `http://${window.location.host}`;
+  const apiUrl = `http://${window.location.host}/`;
   return fetch(apiUrl + uri, {
     method,
     body,
