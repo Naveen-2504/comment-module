@@ -1,5 +1,5 @@
 export default async function ({  uri, method = "GET", body }) {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = `http://${window.location.host}`;
   return fetch(apiUrl + uri, {
     method,
     body,

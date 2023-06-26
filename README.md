@@ -17,10 +17,6 @@ clone and move into repository
 
 `cd comment-module`
 
-Move examples
-
-`cp .env.example .env`
-
 
 Install node packages
 
